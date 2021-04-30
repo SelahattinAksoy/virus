@@ -1,0 +1,367 @@
+
+{% include "WEB_PAGE_PARTS/temp.html" %}
+<br><br>
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+  
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+
+ 
+<style>
+  .ui-autocomplete {
+    max-height: 150px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+
+  }
+
+
+
+.spinner-wrapper{
+    width: 100%;
+    height: 100%;
+    background-color: #151515;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+}
+
+.spinner::before,
+.spinner:after{
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+}
+
+.spinner:before {
+    width: 100%;
+    height: 100%;
+    background-image:linear-gradient(90deg, #ff00cc 0%,#333399 100% );
+    animation: spin .5s infinite linear;
+}
+.spinner:after {
+    width: 90%;
+    height: 90%;
+    background-color: #151515;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+.pre-scrollable {
+    max-height: 640px;
+    overflow-y: scroll;
+}
+
+
+</style>
+  
+
+<body>
+
+<div class='spinner-wrapper'>
+    <div class="spinner"></div>
+</div>
+<div class="shadow-lg m-5">
+
+        <div class="row  mt-2" >
+              <div class="col-sm-2"  >
+                 <p class=" text-primary ml-5 m-2 lead" style="font-size:23px">Virus Family :</p>
+                
+              </div>
+              <form method="POST">
+              {% csrf_token %}
+                  <div class="mr-3 m-3">
+                    <select id="virus_family" class="selectpicker border border-primary  " name="virus_family_selected" >
+                    <option selected> </option>
+                    <option value="Adenovirus">Adenovirus</option>
+                    <option value="Coronavirus">Coronavirus</option>
+                    <option value="Influenza">Influenza</option>
+                    </select>
+                    <button type="submit" name="select_virus_family" class="btn btn-success">Search</button>
+                  </div>
+              </form>         
+     
+        <div class="pre-scrollable mr-5 ml-5"   style="height: 800px; width:100%" >
+            <table id="virus_table" class="table table-striped  table-bordered " >
+             
+         
+             <thead class="border" >
+
+                  <tr>
+                  
+             {% for key, values in tabele_structure.items %}
+                  <th class="text-white lead " colspan="{{ values|length }}" style="horizontal-align : middle;text-align:center;background-color:rgba(0, 0, 0, 0.6);">{{key}}</th>
+              
+             {% endfor %}
+              </tr> 
+                      <tr >
+                         {% for key, values in tabele_structure.items %}
+                            {% for k in values %}
+                            <th class="golden_color "  style="horizontal-align : middle;text-align:center;font-size:12px;background-color:rgba(0, 0, 0, 0.2);">{{k}}</th>
+                               {% endfor %}  
+                         {% endfor %}
+                      
+                      </tr>
+                  </thead>
+                  <tbody>
+                  
+              
+                      {% if data %}
+
+                      {% for i in data%}
+                      <tr>
+                         {% for k,v in i.items %}
+                          
+                             {% if k in table_link_list%}
+                                <th style="font-size:10px"><a onclick="goWebSite('{{v}}')"  href="javascript:void(0);" > {{v}}</a></th>
+                              {% else %}
+                              <th style="font-size:10px"> {{v}}</th>
+                            
+                             {% endif %}
+                        {% endfor %}
+                      </tr>
+                      {% endfor %}
+                      {% endif %}
+                    
+                  </tbody>
+
+                     <tfoot>
+                        <tr>
+                            
+                            
+                             {% for key, values in tabele_structure.items %}
+                                {% for k in values %}              
+                                      <th class="golden_color bg-light" style="font-size:15px">{{k }}</th>
+                                 {% endfor %}  
+                            {% endfor %}
+                            
+                        </tr>
+                    </tfoot>
+                  
+                
+             </table></div>
+        </div>
+        </div>
+      
+
+
+      {% include "WEB_PAGE_PARTS/footer.html" %}
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+
+    
+
+
+    
+    <script>
+/*
+    $(function(){
+      $( '#pepe').autocomplete({
+        source: '{% url 'virustable' %}',
+        minLength:3
+    });
+ });
+
+*/
+
+   $(window).on("load",function(){
+         
+
+         var table = $('#virus_table').DataTable( {
+                  destroy: true,
+                  searching: false,
+                  buttons: [ {
+            
+                 extend: 'collection',
+                 text: 'Export',
+                 buttons: [
+                    { extend: 'copy', className: 'btn-outline-primary',text: 'Copy like TSV' },
+                    { extend: 'excel', className: 'btn-outline-primary' },
+                    { extend: 'csv', className: 'btn-outline-primary' },
+                    { extend: 'colvis', className: 'btn-outline-primary' },
+                   
+
+                   
+                    
+                  ],
+                  
+               
+            }],
+               "columnDefs": [
+                        {
+                            "targets": [ 0 ],
+                            "visible": false,
+                            "searchable": false
+                        },
+                        {
+                            "targets": [ 3 ],
+                            "visible": false
+                        }
+                    ],
+            
+                    
+        } );
+
+        
+    
+        table.buttons().container()
+            .appendTo( '#virus_table_wrapper .col-md-6:eq(0)' );
+
+
+     
+            
+    } );
+
+
+ 
+$(document).ready(function () {
+          
+      $(".spinner-wrapper").fadeOut("slow");
+     
+
+
+   
+         var csrf=$("input[name=csrfmiddlewaretoken]").val()
+          $("#selo").click(function (event) {
+             
+                  var str = "";
+                  $( "select option:selected" ).each(function() {
+                    
+                    str += $( this ).text();
+                     if(str.length>5) {
+                          return false; // breaks
+                      }
+                   
+                  });
+                  alert(str);
+                  
+       
+
+                 event.preventDefault();
+                 $(".spinner-wrapper").fadeIn("slow");
+                 $.ajax({
+                  type: "post",
+                  url:'{% url 'virustable' %}',
+                  data:{
+          
+                  
+                  csrfmiddlewaretoken:csrf
+                },
+                      
+                  success:function(data){
+                      $(".spinner-wrapper").fadeOut("slow");
+                      alert("qsw");
+                   
+                              
+                  }
+                });
+            
+          //$('#attribute_input').show("slow");
+          //$("#virus_family_div").show("slow");
+        
+        
+
+});
+
+   });
+
+     </script>
+
+
+
+
+
+
+
+
+<script>
+
+      function goWebSite(e){
+          url='https://www.uniprot.org/uniprot/'+e.split("/")[0]
+          window.open(url);
+      }
+
+      $(document).ready(function() {
+        // Setup - add a text input to each footer cell
+        $('#virus_table tfoot th').each( function () {
+            var title = $(this).text();
+            $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+        } );
+    
+        // DataTable
+        var table = $('#virus_table').DataTable({
+            initComplete: function () {
+                // Apply the search
+                this.api().columns().every( function () {
+                    var that = this;
+    
+                    $( 'input', this.footer() ).on( 'keyup change clear', function () {
+                        if ( that.search() !== this.value ) {
+                            that
+                                .search( this.value )
+                                .draw();
+                        }
+                    } );
+                } );
+            }
+        });
+    
+    } );
+
+    $("#virus_table").on("mouseover", function() {
+            $(this).children("thead").addClass("shadow-lg");
+            $(this).css("border","1px solid #00bfff");
+              
+
+            
+          }).on("mouseout", function() {
+              $(this).children("thead").removeClass("shadow-lg");
+      
+              
+          });
+</script>
+</body>
+
+
+
+
+</html>

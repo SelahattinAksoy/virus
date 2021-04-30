@@ -1,0 +1,86 @@
+
+<style>
+
+        :root {
+  --size: 75px;
+  --clr-bg: #272324;
+  --clr1: #bbbb88;
+  --clr2: #ccc68d;
+  --clr3: #eedd99;
+  --clr4: #eec290;
+  --clr5: #eeaa88;
+}
+
+
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+
+
+@media (min-width: 600px) {
+  .container {
+    grid-template-rows: repeat(2, auto);
+    grid-template-columns: repeat(3, auto);
+  }
+}
+.spinner:nth-child(1) {
+  --animation-duration: 1000ms;
+  width: var(--size);
+  height: var(--size);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.spinner:nth-child(1) .spinner-item {
+  width: calc(var(--size) / 12);
+  height: 80%;
+  background: var(--clr-spinner);
+  animation: spinner1 var(--animation-duration) ease-in-out infinite;
+}
+@keyframes spinner1 {
+  50% {
+    transform: scaleY(0.25);
+  }
+}
+.spinner:nth-child(1) .spinner-item:nth-child(1) {
+  --clr-spinner: var(--clr1);
+  animation-delay: calc(var(--animation-duration) / 10 * -3);
+}
+.spinner:nth-child(1) .spinner-item:nth-child(2) {
+  --clr-spinner: var(--clr5);
+  animation-delay: calc(var(--animation-duration) / 10 * -1);
+}
+.spinner:nth-child(1) .spinner-item:nth-child(3) {
+  --clr-spinner: var(--clr3);
+  animation-delay: calc(var(--animation-duration) / 10 * -2);
+}
+.spinner:nth-child(1) .spinner-item:nth-child(4) {
+  --clr-spinner: var(--clr4);
+  animation-delay: calc(var(--animation-duration) / 10 * -1);
+}
+.spinner:nth-child(1) .spinner-item:nth-child(5) {
+  --clr-spinner: var(--clr2);
+  animation-delay: calc(var(--animation-duration) / 10 * -3);
+}
+
+
+
+
+
+
+</style>
+  
+
+  <div class="spinner">
+    <div class="spinner-item"></div>
+    <div class="spinner-item"></div>
+    <div class="spinner-item"></div>
+    <div class="spinner-item"></div>
+    <div class="spinner-item"></div>
+</div>
+

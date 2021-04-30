@@ -1,0 +1,227 @@
+
+{% include "WEB_PAGE_PARTS/temp.html" %}
+
+      <br><br><hr>
+
+<style>   
+
+
+
+
+.spinner-wrapper{
+    width: 100%;
+    height: 100%;
+    background-color: #151515;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+}
+
+.spinner::before,
+.spinner:after{
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+}
+
+.spinner:before {
+    width: 100%;
+    height: 100%;
+    background-image:linear-gradient(90deg, #ff00cc 0%,#333399 100% );
+    animation: spin .5s infinite linear;
+}
+.spinner:after {
+    width: 90%;
+    height: 90%;
+    background-color: #151515;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+.golden_color{
+  color: #665d1e;
+}
+
+
+.golden_border{
+  border: 0.001em solid #665d1e;
+}
+.golden_color{
+  color: #665d1e;
+}
+.text {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+   -webkit-box-orient: vertical;
+}
+.pre-scrollable {
+    max-height: 560px;
+    overflow-y: scroll;
+}
+</style>
+      
+    <main role="main">
+      <div class='spinner-wrapper'>
+        <div class="spinner"></div>
+    </div>
+
+      <div class="container marketing" >
+         
+         <div class="container">
+            <div class="row">
+                <div class="col col-sm-12">
+                   
+                </div>
+
+            </div>         
+            <div class="row">
+                <div class="col-sm-12 mt-5">
+                    <div class="card golden_border">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <a href="/publications" target="_blank" ><i class="fa fa-newspaper-o fa-2x golden_color" aria-hidden="true"></i><br></a>
+                            </div>
+                            <div class="col-sm-4">
+                                <h6 class="card-text  text-center golden_color">   <a href="/publications" target="_blank" class="golden_color">Announcement</a></h6>
+                            </div>
+                              <div class="col-sm-4">
+                                <a href="/publications" target="_blank" ><i class="fa fa-newspaper-o fa-2x golden_color float-right" aria-hidden="true"></i><br></a>
+                            </div>
+                    </div>
+                    </div>
+                </div>
+            </div> 
+       </div>
+
+
+<div class="container">
+
+   <div class="row featurette shadow-lg">
+        {% if annonces%}  
+        {% for i in annonces  %}
+            <div class="col-md-6">
+                <div class="card shadow-lg m-3 ">
+                 <div class="card-header" style="height:100px">
+                        <a href="#" style="color: #800000"><i class="fa fa-newspaper-o fa-2x" aria-hidden="true"></i></a>  
+                        <span class="lead" style="font-size:19px"> {{i.title |truncatewords:10}}</span>
+                </div>
+                <div class="card-body lead m-2" style="background:#add8e6;height:250px;font-size:16px">
+                        
+                       
+                        <div class="mt-2">
+                          <div class="row">
+                              <div class="col-sm-12">
+                                 <p>{{i.body  |truncatewords:20}}</p>
+                              </div>
+                             <div class="col-sm-6">
+                             <form method="POST">
+                             {% csrf_token %}
+                                    <input name="announce_id" value="{{i.id}}" type="hidden"  readonly>
+                                    <button  class="btn btn-primary btn-block">Read </button>
+                            </form>
+                            </div>
+                            <div class="col-sm-6">
+                                    <span>{{i.date}}</span>         
+                            </div>
+                          </div>
+                    </div>
+                </div>
+                </div>      
+            </div>
+
+        {% endfor %}
+        {% endif %}
+        {% if annonce%} 
+            <div class="col-md-12  pre-scrollable">
+                <div class="card shadow-lg m-3 text-center">
+                 <div class="card-header" style="height:100px">
+                        <a href="#" style="color: #800000"><i class="fa fa-newspaper-o fa-2x" aria-hidden="true"></i></a>  
+                        <span class="lead " style="font-size:19px"> {{annonce.title}}</span>
+                </div>
+                <div class="card-body" style="background:#add8e6;height:250px">
+                        
+                        <p>{{annonce.body }}</p>
+                       
+                
+                      <span>{{annonce.date}}</span>         
+                            
+                          
+                    
+                </div>
+                </div>      
+            </div>
+
+        {% endif %}
+
+  </div>
+
+
+</div> 
+
+
+
+
+
+</main>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  </body>
+
+  
+
+      {% include "WEB_PAGE_PARTS/footer.html" %}
+
+  <script>
+    $(window).on("load",function(){
+        $(".spinner-wrapper").fadeOut("slow");
+      
+            
+    });
+    
+
+
+
+    $(".card").on("mouseover", function() {
+     
+           $(this).removeClass("shadow-lg");
+           $(this).children( ".card-header" ).css("background-color","#87ceeb");
+           $(this).children( ".card-body" ).addClass("bg-white");
+           $(this).children( ".btn" ).addClass("btn-info");
+           $(this).children( ".btn" ).css("color","white");
+           $(this).css("border","1px solid #00bfff");
+
+         
+      }).on("mouseout", function() {
+            $(this).addClass("shadow-lg");
+            $(this).children( ".card-header" ).css("background-color","");
+            $(this).children( ".btn" ).removeClass("btn-info");
+             $(this).children( ".card-body" ).removeClass("bg-white");
+            $(this).children( ".btn" ).css("color","");
+            $(this).css("border","");
+ 
+      });
+
+  </script>
+</html>

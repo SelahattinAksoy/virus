@@ -1,0 +1,268 @@
+
+{% include "WEB_PAGE_PARTS/temp.html" %}
+
+      <br><br><hr>
+
+<style>   
+
+
+
+
+.spinner-wrapper{
+    width: 100%;
+    height: 100%;
+    background-color: #151515;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+}
+
+.spinner::before,
+.spinner:after{
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+}
+
+.spinner:before {
+    width: 100%;
+    height: 100%;
+    background-image:linear-gradient(90deg, #ff00cc 0%,#333399 100% );
+    animation: spin .5s infinite linear;
+}
+.spinner:after {
+    width: 90%;
+    height: 90%;
+    background-color: #151515;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+.golden_color{
+  color: #665d1e;
+}
+
+
+.golden_border{
+  border: 0.001em solid #665d1e;
+}
+.golden_color{
+  color: #665d1e;
+}
+
+</style>
+      
+    <main role="main">
+      <div class='spinner-wrapper'>
+        <div class="spinner"></div>
+    </div>
+
+      <div class="container marketing" >
+
+         
+         <div class="container">
+            <div class="row">
+                <div class="col col-sm-12">
+                    <img width="100%" src="https://suzeklab.files.wordpress.com/2020/07/cropped-img_2075-1-3.jpg">
+                </div>
+
+            </div>
+         <h2 class="lead text-center "><br>About</h2><hr>
+         </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card border-secondary">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <a href="/publications" target="_blank" ><i class="fa fa-book fa-2x golden_color" aria-hidden="true"></i><br></a>
+                            </div>
+                            <div class="col-sm-8">
+                                <h6 class="card-text  text-center golden_color">   <a href="/publications" target="_blank" class="golden_color">Publications &raquo; &raquo;</a></h6>
+                            </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card border-secondary">
+                    <div class="card-body">
+                            <div class="row">
+                            <div class="col-sm-4">
+                               <a href="/announcement"  target="_blank"><i class="fa fa-newspaper-o fa-2x golden_color" aria-hidden="true"></i><br></a>
+                             </div>
+                                
+                            <div class="col-sm-8">
+                                <h6 class="card-text  text-center "><a href="/announcement" class="golden_color"  target="_blank">Announcements  &raquo; &raquo;</a></h6>
+                            </div>
+                    </div>
+                        
+                    </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card border-secondary">
+                    <div class="card-body ">
+                        <div class="row">
+                            <div class="col-sm-4">
+                              <a href="https://suzek-lab.org"  target="_blank"><i class="fa fa-desktop fa-2x golden_color" aria-hidden="true"></i><br></a> 
+                            </div>
+                            <div class="col-sm-8">
+                                <h6 class="card-text  text-center golden_color" > <a href="https://suzek-lab.org" class="golden_color"  target="_blank">Suzek-Lab  &raquo;&raquo;</a></h6>
+                            </div>
+                    </div>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+    <hr class="featurette-divider">
+     <div class="row featurette shadow-lg p-4">
+          <div class="col-md-7">
+            <h2 class="featurette-heading golden_color golden_color">What We Do ?</h2>
+            <p class="lead">
+              {{file_content_what_we_do}}
+             <br>
+                 See our <a href="https://suzek-lab.org/">Süzek Lab Web</a> page
+
+            </p>
+          </div>
+          <div class="col-md-5 mt-4 p-4">
+             <img  width="450" height="650" class="featurette-image img-fluid mx-auto" 
+              src="http://biyoinformatik.fenbilimleri.mu.edu.tr/Newfiles/328/Slider/cnbmac2019(1).jpg">
+        
+          </div>
+        </div>
+      
+        <hr class="featurette-divider">
+
+        <div class="row featurette shadow-lg p-4">
+          <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading golden_color">Who We are ? </h2>
+            <p class="lead">
+          
+                 {{file_content_who_we_are}}
+
+           </p>
+          </div>
+          <div class="col-md-5 order-md-1 p-3 mt-3" >
+           <img width="450" height="450" class="featurette-image img-fluid mx-auto" 
+            src="https://suzeklab.files.wordpress.com/2020/11/cropped-suzeklab.5.jpg" >
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+
+        <div class="row featurette shadow-lg p-5">
+          <div class="col-md-7 ">
+            <h2 class="featurette-heading golden_color">And lastly. <span class="text-muted">We will do more more.</span></h2>
+            <p class="lead">
+                We will continoue produce projects, stay tune...we will back :) <br>
+                If you want be part of our team <a href="http://biyoinformatik.fenbilimleri.mu.edu.tr/en ">To Apply Check University Web Site</a> Bioinformatics at Mugla University
+
+           </p>
+          </div>
+          <div class="col-md-5 ">
+            <img  width="450" height="450" class="featurette-image img-fluid mx-auto"
+             src="http://biyoinformatik.fenbilimleri.mu.edu.tr/Newfiles/328/Slider/hibit2017.jpeg">
+          </div>
+        </div>
+
+        <hr class="featurette-divider">
+        <div class="container marketing mt-4" >
+        <div class="row featurette shadow-lg" >
+        
+          <div class="card col-md-7 "  style="background-color: rgba(0, 0, 0, 0.2); ">
+            <div class="m-4" >
+                  <h2 class="featurette-heading golden_color text-center">If you want to be<br> Part of our excellent Team 
+                  <span class="text-muted"><br>Contact with Us</span></h2>
+                
+                    <form>
+                        <div class="form-group">
+                          <label for="exampleFormControlInput1">Email address</label>
+                          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleFormControlSelect1">Title of Message</label>
+                          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Title of message">
+                        </div>
+                        <div class="form-group">
+                          <label for="exampleFormControlTextarea1">Your Message</label>
+                          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        </div>
+                  </form>
+
+                  <p><a  class="btn btn-primary float-right" href="#" role="button">Send &raquo;</a></p>
+             </diV>
+          </div>
+          <div class="col-md-5" >
+          <div class="card shadow-lg" >
+           <img width="370" height="370" class="featurette-image img-fluid mx-auto border border-dark shadow-lg rounded m-1 ml-0" 
+           src="http://biyoinformatik.fenbilimleri.mu.edu.tr/Newfiles/328/Slider/cnbmac2019(1).jpg" >
+              <div class="card-body text-center">
+               <p class="lead " >Our Team </p>
+               <p>
+                    <strong>E-posta :</strong><br> tugbasuzek@mu.edu.tr <br>
+                        <strong>Telefon :</strong> <br> 0252 2115484 <br>
+                        <strong>Address :</strong><br>Tuğba Önal-Süzek,PhD<br>
+                        Bioinformatics Masters/PhD Program<br>
+                        Graduate Program of Applied and Natural Sciences<br>
+                        Mugla Sitki Kocman University<br>
+                        Kotekli/Mugla/Turkey<br><br>
+                        <strong>Web Page :</strong><br>
+                       <a href="http://biyoinformatik.fenbilimleri.mu.edu.tr/en" target="_blank"> http://biyoinformatik.fenbilimleri.mu.edu.tr/en</a>
+                 </p>         
+               <div class="float-right">
+                       <i class="fa fa-linkedin-square" style="font-size:23px; color: #665d1e"></i>
+                       <i class="fa fa-github-square" style="font-size:23px; color: #665d1e"></i>
+                       <i class="fa fa-google-plus-square" style="font-size:23px; color: #665d1e"></i>
+                        <i class="fa fa-facebook-square" style="font-size:23px; color: #665d1e"></i>
+                  </div>
+            </div>
+          </div>
+
+          </div>
+        </div>
+        
+       </div>
+      </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  </body>
+
+  
+
+      {% include "WEB_PAGE_PARTS/footer.html" %}
+
+  <script>
+    $(window).on("load",function(){
+        $(".spinner-wrapper").fadeOut("slow");
+      
+            
+    });
+
+  </script>
+</html>

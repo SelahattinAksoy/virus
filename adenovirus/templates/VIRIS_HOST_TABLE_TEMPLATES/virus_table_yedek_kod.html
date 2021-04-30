@@ -1,0 +1,265 @@
+
+{% include "WEB_PAGE_PARTS/temp.html" %}
+<br><br><br>
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <title>Bootstrap 4 Responsive Datatable and Export to PDF, CSV</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap4.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap4.min.css">
+  
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+</head>
+
+ 
+<style>
+  .ui-autocomplete {
+    max-height: 150px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+
+  }
+
+
+
+.spinner-wrapper{
+    width: 100%;
+    height: 100%;
+    background-color: #151515;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+}
+
+.spinner::before,
+.spinner:after{
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+}
+
+.spinner:before {
+    width: 100%;
+    height: 100%;
+    background-image:linear-gradient(90deg, #ff00cc 0%,#333399 100% );
+    animation: spin .5s infinite linear;
+}
+.spinner:after {
+    width: 90%;
+    height: 90%;
+    background-color: #151515;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+
+</style>
+  
+
+<body><br><hr>
+
+<div class='spinner-wrapper'>
+    <div class="spinner"></div>
+</div>
+<div class="container shadow-lg">
+
+        <div class="row m-4 mt-3" >
+              <div class="col-sm-5"  >
+                 <h5 class=" text-primary">Search from Database</h5>
+              </div>
+              <div class="mr-3">
+                <select id="virus_family" class="selectpicker border border-primary lg " >
+                <option selected> Virus Family</option>
+                <option value="1">Adenovirus</option>
+                <option value="2">Other Virus</option>
+                <option value="3">Computer Virus</option>
+                </select>
+              </div>
+              <div  id="virus_family_div" style="display:none">
+                <select id="virus_family" class="selectpicker border border-primary lg " >
+                <option selected> Species</option>
+                <option value="1">Adenovirus</option>
+                <option value="2">Other Virus</option>
+                <option value="3">Computer Virus</option>
+                </select>
+              </div>
+        <div><br>
+        <form method="POST">
+                {% csrf_token %}
+      <div id="attribute_input" class="row" style="display:none" >
+      
+          <div class="col-sm-2" >
+
+           <input type="text" name="pepe" id="pepe" class="search form-control border border-info" placeholder="Enter Tax id" minlength="3">
+          </div>
+          <div class="col-sm-2">
+           <input type="text"  class="search form-control border border-info" placeholder="--">
+          </div>
+          <div class="col-sm-2">
+           <input type="text" class="search form-control border border-info" placeholder="--">
+          </div>
+          <div class="col-sm-2">
+           <input type="text" class="search form-control border border-info" placeholder="--">
+          </div>
+          <div class="col-sm-2">
+           <input type="text" class="search form-control border border-info" placeholder="--">
+          </div>
+           <div class="col-sm-2">
+         
+                <button id="search" type="submit" class="btn btn-block btn-primary">Search</button>
+           
+          </div>
+          </form>
+          
+      </div><hr>
+	<table id="virus_table" class="table table-striped table-bordered dt-responsive stripe" style="width:100%">
+        <thead>
+
+          
+            <tr>
+                <th>Tax Id</th>
+                <th>Sci name</th>
+                <th>Common Name</th>
+                <th>UniPort Acc.</th>
+                <th>Sequence</th>
+                <th>Host Name</th>
+                <th>Familiy </th>
+                <th>Order</th>
+                <th>Class</th>
+                   <th>**</th>
+            
+            </tr>
+        </thead>
+        <tbody>
+        
+    
+            {% if qst %}
+              {% for i in qst%}
+            <tr>
+                <th>{{i.title}}</th>
+                 <th>{{i.qt}}</th>
+                  <th>{{i.title}}</th>
+                   <th>{{i.title}}</th>
+                 <th>{{i.title}}</th>
+                  <th>{{i.title}}</th>
+                   <th>{{i.qt}}</th>
+                 <th>{{i.qt}}</th>
+                  <th>{{i.title}}</th>
+                <th>{{i.qt}}</th>
+
+            
+            </tr>
+            {% endfor %}
+            {% endif %}
+           
+        </tbody>
+    </table>
+
+    </div>
+    </div>
+    </div>
+    
+    
+     
+
+      {% include "WEB_PAGE_PARTS/footer.html" %}
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-autocomplete/1.0.7/jquery.auto-complete.min.js" integrity="sha512-TToQDr91fBeG4RE5RjMl/tqNAo35hSRR4cbIFasiV2AAMQ6yKXXYhdSdEpUcRE6bqsTiB+FPLPls4ZAFMoK5WA==" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
+    <script>
+
+    $(function(){
+      $( '#pepe').autocomplete({
+        source: '{% url 'virustable' %}',
+        minLength:3
+    });
+
+
+    $(document).ready(function() {
+         var table = $('#virus_table').DataTable( {
+            lengthChange: false,
+            buttons: [ 
+            
+            
+                 
+                    { extend: 'copy', className: 'btn-outline-primary' },
+                    { extend: 'excel', className: 'btn-outline-primary' },
+                    { extend: 'csv', className: 'btn-outline-primary' },
+                    { extend: 'pdf', className: 'btn-outline-primary' },
+                    { extend: 'colvis', className: 'btn-outline-primary' }
+             ],
+                   
+        } );
+    
+        table.buttons().container()
+            .appendTo( '#virus_table_wrapper .col-md-6:eq(0)' );
+            
+    } );
+
+
+    });
+    $(window).on("load",function(){
+        $(".spinner-wrapper").fadeOut("slow");
+
+        $('#virus_table_wrapper').find('div').first().remove();
+        
+    });
+
+
+      $('#virus_family').change(function() {
+       
+          $('#attribute_input').show("slow");
+          $("#virus_family_div").show("slow");
+        });
+
+
+
+     </script>
+
+</body>
+
+
+
+
+
+</html>

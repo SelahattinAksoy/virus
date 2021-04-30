@@ -1,0 +1,355 @@
+
+{% include "WEB_PAGE_PARTS/temp.html" %}
+<title>Team</title>
+<style>
+  .ui-autocomplete {
+    max-height: 150px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+
+  }
+
+
+
+.spinner-wrapper{
+    width: 100%;
+    height: 100%;
+    background-color: #151515;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+}
+
+.spinner::before,
+.spinner:after{
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+}
+
+.spinner:before {
+    width: 100%;
+    height: 100%;
+    background-image:linear-gradient(90deg, #ff00cc 0%,#333399 100% );
+    animation: spin .5s infinite linear;
+}
+.spinner:after {
+    width: 90%;
+    height: 90%;
+    background-color: #151515;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+.golden_color{
+  color: #665d1e;
+}
+
+
+</style>
+  
+<div class='spinner-wrapper'>
+    <div class="spinner"></div>
+</div>
+    <main role="main">
+
+      <br><br><br><br><br>
+
+
+      <div class="container marketing " >
+        <div class="row featurette shadow-lg" >
+          <div class="col-md-5" >
+
+          <div class="card shadow-lg" style="width: 18rem;" >
+           <img width="250" height="250" class="featurette-image img-fluid mx-auto border border-dark shadow-lg rounded m-1" src="https://suzeklab.files.wordpress.com/2014/06/barisimage.jpg?w=150" >
+                   <div class="card-body">
+               <p class="lead" >Team Lead</p>
+               <p>
+                    <strong>E-posta :</strong><br> barissuzek@mu.edu.tr <br>
+                        <strong>Telefon :</strong> <br> 0252 211 5583 <br></p>
+                   
+               <div class="float-right">
+                
+                           <img widt="31" height="31"  src="https://www.clipartkey.com/mpngs/m/124-1242841_logo-google-scholar-icon.png">
+                          <a href="#"><i class="fa fa-linkedin-square gol" style="font-size:33px;"></i></a>
+                          <img widt="28" height="28" src="data:image/png;base64,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">
+                      
+                  </div>
+            </div>
+          </div>
+
+               
+          </div>
+          <div class="card col-md-7 "  style="background-color: rgba(0, 0, 0, 0.2); ">
+            <div class="m-4" >
+                  <h2 class="featurette-heading golden_color">Ph.D. Barış Süzek <span class="text-muted">Biography</span></h2>
+                
+                    <p>Project manager<br>Barış Ethem Süzek, Ph.D.</p>
+                  
+                  <p class="lead golden_color">
+                          E-posta : barissuzek@mu.edu.tr <br>
+                          Telefon : 0252 211 5583 <br>
+                          Web     : <a href="http://akademik.mu.edu.tr/barissuzek"  target="_blank">http://akademik.mu.edu.tr/barissuzek </a><br>
+                  </p>
+                  <p><a  class="btn btn-primary " href="#" role="button">Contact &raquo;</a></p>
+             </diV>
+          </div>
+        </div>
+       
+        <br><br><br>
+         <h3 class="lead">PhD STUDENTS</h3><hr>
+         
+        <div class="row featurette shadow-lg">
+          <div class="col-md-4 ">
+           
+              <div class="card shadow-lg m-3">
+               <div class="card-header">
+                 <img  width="66" height="66"  class="featurette-image img-fluid mx-auto border border-primary shadow-lg rounded-circle left" src="data:image/jpeg;base64,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">
+                  <strong  class="m-4 golden_color" >  Erdem Türk</strong>
+                </div>
+             
+              <div class="card-body">
+              
+                    <p class="lead">Research Assistant PhD</p>
+                    <p class="">
+                    <strong>E-posta :</strong><br> erdemturk@mu.edu.tr <br>
+                        <strong>Telefon :</strong> <br> 0252 211 5056 <br>
+                         <strong>Web     :</strong> <a href="http://akademik.mu.edu.tr/erdemturk" 
+                          target="_blank">http://akademik.mu.edu.tr/erdemturk </a><br>
+           
+                    </p>
+                    <div class="mt-5">
+                      
+                      <div class="float-right">
+                          <img widt="31" height="31"  src="https://www.clipartkey.com/mpngs/m/124-1242841_logo-google-scholar-icon.png">
+                          <a href="#"><i class="fa fa-linkedin-square" style="font-size:33px;"></i></a>
+                          <img widt="28" height="28" src="data:image/png;base64,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">
+                      
+                    </div>
+                  
+                  </div>
+              </div>
+             
+          </div>
+          </div>
+          <div class="col-md-4">
+           
+           <div class="card shadow-lg m-3">
+               <div class="card-header">
+                 <span><img  width="85" height="85" class="featurette-image img-fluid mx-auto border border-primary shadow-lg rounded-circle left"  src="https://suzeklab.files.wordpress.com/2014/06/betulasiyekarpuzcu-e1558587894253.jpg?w=150&h=141"  >
+                    <strong class="golden_color" >  Betül Asiye Karpuzcu</strong></span>
+               </div>
+             
+                <div class="card-body">
+                  
+                     <p class="lead"> PhD Student</p>
+                    <p class="">
+                    <strong>E-posta :</strong><br> asiyekarpuzcu@gmail.com <br>
+                        <strong>Telefon :</strong> <br> 0252 211 5056 <br>
+                         <strong>Web     :</strong> <a href="http://akademik.mu.edu.tr/erdemturk" 
+                          target="_blank">http://akademik.mu.edu.tr/erdemturk </a><br>
+           
+                    </p>
+                     <div class="mt-5">
+                       
+                        <div class="float-right"> 
+                          
+                          <img widt="31" height="31"  src="https://www.clipartkey.com/mpngs/m/124-1242841_logo-google-scholar-icon.png">
+                          <a href="#"><i class="fa fa-linkedin-square" style="font-size:33px;"></i></a>
+                          <img widt="28" height="28" src="data:image/png;base64,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">
+                      
+                      </div>
+                  </div>
+                </div>
+              
+          </div>
+         
+          </div>
+           <div class="col-md-4">
+                <div class="card shadow-lg m-3">
+
+                  <div class="card-header">
+                      <span><img  width="85" height="85" class="featurette-image img-fluid mx-auto border border-primary shadow-lg rounded-circle" src="https://suzeklab.files.wordpress.com/2014/06/onurcan.jpg?w=150&h=145"  >
+                        <strong class="golden_color"  >Onur Can Karabulut</strong></span>
+                  </div>
+             
+              
+              <div class="card-body">
+                  
+                     <p class="lead"> PhD Student</p>
+                    <p class="">
+                    <strong>E-posta :</strong><br> 	o.karabulut07@gmail.com <br>
+                        <strong>Telefon :</strong> <br> 0252 211 5056 <br>
+                         <strong>Web     :</strong> <a href="http://akademik.mu.edu.tr/erdemturk" 
+                          target="_blank">http://akademik.mu.edu.tr/erdemturk </a><br>
+           
+                    </p>
+
+                    <div class="mt-5">
+                      
+                       <div class="float-right">
+                          <img widt="31" height="31"  src="https://www.clipartkey.com/mpngs/m/124-1242841_logo-google-scholar-icon.png">
+                          <a href="#"><i class="fa fa-linkedin-square" style="font-size:33px;"></i></a>
+                          <img widt="28" height="28" src="data:image/png;base64,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">
+                      
+                    </div>
+                  </div>
+                </div>
+             
+          </div>
+            
+            
+        
+          </div>
+        </div>
+
+        <hr class="featurette-divider shadow-lg"><br>
+       
+        <hr class="featurette-divider shadow-lg"><br>
+        <h3 class="lead">MSc STUDENTS</h3><hr>
+        <div class="row featurette shadow-lg">
+          <div class="col-md-4">
+             
+             <div class="card shadow-lg m-3">
+                <div class="card-header">
+                      <span><img  width="85" height="85" class="featurette-image img-fluid mx-auto border border-primary shadow-lg rounded-circle" src="data:image/jpeg;base64,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"  width="140" height="140">
+                          <strong class="m-4 m-4 golden_color"  > Selahattin Aksoy</strong></span>
+                </div>
+              <div class="card-body">
+                  
+                     <p class="lead"> Master Student</p>
+                    <p class="">
+                    <strong>E-posta :</strong><br> erdemturk@mu.edu.tr <br>
+                        <strong>Telefon :</strong> <br> 0252 211 5056 <br>
+                         <strong>Web     :</strong> <a href="http://akademik.mu.edu.tr/erdemturk" 
+                          target="_blank">http://akademik.mu.edu.tr/erdemturk </a><br>
+           
+                    </p>
+                    <div class="mt-5">
+                       
+                        <div class="float-right">
+                          <img widt="31" height="31"  src="https://www.clipartkey.com/mpngs/m/124-1242841_logo-google-scholar-icon.png">
+                          <a href="#"><i class="fa fa-linkedin-square" style="font-size:33px;"></i></a>
+                          <img widt="28" height="28" src="data:image/png;base64,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">
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+       
+          </div>
+
+
+        </div>
+        <hr class="featurette-divider shadow-lg"><br>
+        <h3 class="lead">BSc STUDENTS</h3><hr>
+        <div class="row featurette shadow-lg">
+          <div class="col-md-4">
+              
+   
+              <div class="card shadow-lg m-3">
+               
+                  <div class="card-header">
+                      <span><img  width="85" height="85" class="featurette-image img-fluid mx-auto border border-primary shadow-lg rounded-circle" src="https://suzeklab.files.wordpress.com/2014/06/ahmed.jpg"  >
+                         <strong class="m-4 m-4 golden_color"  >  Ahmed Hassan</strong></span>
+                  </div>
+             <div class="card-body">
+                  
+                     <p class="lead"> Master Student</p>
+                    <p class="">
+                    <strong>E-posta :</strong><br> erdemturk@mu.edu.tr <br>
+                        <strong>Telefon :</strong> <br> 0252 211 5056 <br>
+                         <strong>Web     :</strong> <a href="http://akademik.mu.edu.tr/erdemturk" 
+                          target="_blank">http://akademik.mu.edu.tr/erdemturk </a><br>
+           
+                    </p>
+                     <div class="mt-5">
+  
+                        <div class="float-right ">
+                          <img widt="31" height="31"  src="https://www.clipartkey.com/mpngs/m/124-1242841_logo-google-scholar-icon.png">
+                          <a href="#"><i class="fa fa-linkedin-square gol" style="font-size:33px;"></i></a>
+                          <img widt="28" height="28" src="data:image/png;base64,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">
+                      
+                      </div>
+                  </div>
+                </div>
+              </div>
+      
+            
+          </div>
+          
+       
+          </div>
+
+
+        </div>
+
+
+
+   <hr class="featurette-divider shadow-lg"><br>
+
+ 
+
+ 
+
+
+      </div><!-- /.container -->
+
+ 
+
+      
+
+      {% include "WEB_PAGE_PARTS/footer.html" %}
+      
+    </main>
+
+      
+   </body>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script>
+
+      $(window).on("load",function(){
+          $(".spinner-wrapper").fadeOut("slow");
+      
+             
+      });
+
+      $(".card").on("mouseover", function() {
+     
+           $(this).removeClass("shadow-lg");
+           $(this).children( ".card-header" ).css("background-color","#87ceeb");
+           $(this).css("border","1px solid #00bfff");
+         
+      }).on("mouseout", function() {
+            $(this).addClass("shadow-lg");
+            $(this).children( ".card-header" ).css("background-color","");
+            $(this).css("border","");
+      });
+
+      
+       
+    
+  </script>
+</html>

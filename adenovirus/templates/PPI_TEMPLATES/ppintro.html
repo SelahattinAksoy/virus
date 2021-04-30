@@ -1,0 +1,167 @@
+
+{% include "WEB_PAGE_PARTS/temp.html" %}
+<style>
+  .ui-autocomplete {
+    max-height: 150px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+
+  }
+
+
+
+.spinner-wrapper{
+    width: 100%;
+    height: 100%;
+    background-color: #151515;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+}
+
+.spinner::before,
+.spinner:after{
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+}
+
+.spinner:before {
+    width: 100%;
+    height: 100%;
+    background-image:linear-gradient(90deg, #ff00cc 0%,#333399 100% );
+    animation: spin .5s infinite linear;
+}
+.spinner:after {
+    width: 90%;
+    height: 90%;
+    background-color: #151515;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+.golden_color{
+  color: #665d1e;
+}
+
+
+</style>
+  
+<div class='spinner-wrapper'>
+    <div class="spinner"></div>
+</div>
+    <main role="main">
+
+      <br><br><br><br><br>
+
+
+      <div class="container marketing " >
+        <div class="row featurette shadow-lg" >
+          <div class="card col-md-12 "  style="background-color: rgba(0, 0, 0, 0.2); ">
+            <div class="m-4 text-center" >
+                  <h2 class="featurette-heading golden_color">Virus-Host PPI Prediction</h2>
+                
+           
+                  
+                    <p class="lead golden_color">
+                            <br>
+                            To predict Virus-Host PPI Prediction click te "<strong>Virus-Host PPI Prediction</strong>" 
+                            <br>
+                    </p>
+                  <a  class="btn btn-success btn-block " href="/ppipredicter" role="button">
+                  <h3>Launch Virus-Host PPI Prediction</h3> <i class="fa fa-rocket fa-3x m-4" aria-hidden="true"></i>
+                      </a>
+             </diV>
+          </div>
+        </div>
+       
+        <br><br><br>
+         <h3>PPI INTRO</h3><hr>
+       
+      <div class="row featurette shadow-lg p-3 mt-4">
+          <div class="col-md-7 order-md-2">
+            <h2 class="featurette-heading golden_color"> Welcome to our web site.. <span class="text-muted">See for yourself.</span></h2>
+            <p class="lead">
+                {{file_content}}
+          </p>
+          </div>
+          <div class="col-md-5 order-md-1">
+             <p class="lead text-center golden_color">Welcome To<br>MSKU Viral</p>
+         </div>
+      </div>
+   </div>
+
+        <hr class="featurette-divider shadow-lg"><br>
+   
+
+
+     
+
+
+        </div>
+
+
+ 
+
+ 
+
+
+      </div>
+
+ 
+ 
+
+      {% include "WEB_PAGE_PARTS/footer.html" %}
+      
+    </main>
+
+      
+   </body>
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+   
+  <script>
+    $(window).on("load",function(){
+        $(".spinner-wrapper").fadeOut("slow");
+      
+            
+    });
+
+
+$(".btn").on("mouseover", function() {
+           
+           $(".card").css("border","1px solid black");
+      
+
+         
+      }).on("mouseout", function() {
+           
+              $(".card").css("border","");
+ 
+      });
+
+
+  </script>
+
+</html>

@@ -1,0 +1,157 @@
+
+{% include "WEB_PAGE_PARTS/temp.html" %}
+<style>
+  .ui-autocomplete {
+    max-height: 150px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+
+  }
+
+
+
+.spinner-wrapper{
+    width: 100%;
+    height: 100%;
+    background-color: #151515;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+}
+
+.spinner::before,
+.spinner:after{
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+}
+
+.spinner:before {
+    width: 100%;
+    height: 100%;
+    background-image:linear-gradient(90deg, #ff00cc 0%,#333399 100% );
+    animation: spin .5s infinite linear;
+}
+.spinner:after {
+    width: 90%;
+    height: 90%;
+    background-color: #151515;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+.golden_color{
+  color: #665d1e;
+}
+
+
+</style>
+  
+<div class='spinner-wrapper'>
+    <div class="spinner"></div>
+</div>
+    <main role="main">
+
+      <br><br><br><br><br>
+
+
+      <div class="container marketing " >
+        <div class="row featurette shadow-lg border border-secondary p-1 m-2" >
+          <div class="card col-md-12 " >
+            <div class="m-4 text-center" >
+                  <h1 class="featurette-heading golden_color m-4 mb-3 lead">Virus-Host PPI Predicter</h1><hr class="border border-secondary mb-1">
+
+                        
+                    <form method="post" enctype="multipart/form-data">
+                      {% csrf_token %}
+                          <div class="container m-3">
+                            <div class="row">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm">
+                                        <label class="golden_color lead">Enter The Viral protein sequence :</label>
+                                        <textarea placeholder="Please Enter the viral protein sequence." class="md-textarea form-control border border-primary" rows="3" name="viral_protein_sequence"></textarea>
+                                </div>
+
+                                <div class="col-sm-1 p-5">
+                                    <label class="golden_color " >OR</label>
+                                </div>
+
+                              <div class="col-sm-2 p-2">
+                                    <label class="golden_color lead">Select Fasta file:</label>
+                                    <input type="file" id="myfile" name="viral_protein_sequence_fatsa_file" >
+                              </div>
+                              <div class="col-sm-1"></div>
+                             </div>
+                             
+                          </div>
+                        
+                           <br><hr class="featurette-divider"><br>
+
+                          <div class="container m-3">
+                            <div class="row">
+                                <div class="col-sm-1"></div>
+                                <div class="col-sm">
+                                          <label class="golden_color lead">Enter The Receptor protein sequence :</label>
+                                          <textarea placeholder="Please Enter the Receptor protein sequence." class="md-textarea form-control border border-primary" rows="3" name="receptor_protein_sequence" ></textarea>
+                                </div>
+
+                                <div class="col-sm-1 p-5">
+                                    <label class="golden_color" >OR</label>
+                                </div>
+
+                              <div class="col-sm-2  p-2">
+                                    <label class="golden_color lead">Select Fasta file:</label>
+                                    <input type="file" id="myfile" name="receptor_protein_sequence_fatsa_file">
+                              </div>
+                              <div class="col-sm-1"></div>
+                             </div>
+                          </div><br><br>
+                               
+                      
+                    <button type="submit" class="btn btn-success  btn-block p-2">Run Predict</button>
+                    </form>
+
+             </diV>
+          </div>
+        </div>
+     </div>
+
+         
+
+      {% include "WEB_PAGE_PARTS/footer.html" %}
+      
+    </main>
+
+      
+   </body>
+   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script>
+    $(window).on("load",function(){
+        $(".spinner-wrapper").fadeOut("slow");
+      
+            
+    });
+
+  </script>
+
+</html>

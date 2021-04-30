@@ -1,0 +1,225 @@
+
+{% include "WEB_PAGE_PARTS/temp.html" %}
+<style>
+  .ui-autocomplete {
+    background-color: #151515;
+    max-height: 150px;
+    overflow-y: auto;
+    /* prevent horizontal scrollbar */
+    overflow-x: hidden;
+
+  }
+
+
+
+.spinner-wrapper{
+    width: 100%;
+    height: 100%;
+    background-color: #151515;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+}
+
+.spinner::before,
+.spinner:after{
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+}
+
+.spinner:before {
+    width: 100%;
+    height: 100%;
+    background-image:linear-gradient(90deg, #ff00cc 0%,#333399 100% );
+    animation: spin .5s infinite linear;
+}
+.spinner:after {
+    width: 90%;
+    height: 90%;
+    background-color: #151515;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+.golden_color{
+  color: #665d1e;
+}
+
+
+</style>
+  
+<div class='spinner-wrapper'>
+    <div class="spinner"></div>
+</div>
+
+
+    <main role="main">
+
+      <br><br><br><br><br>
+
+
+      <div class="container marketing " >
+        <div class="row featurette shadow-lg border border-secondary p-1 m-2" >
+          <div class="card col-12 "  >
+            <div class="m-4 text-center" >
+                  
+                  <h2 class="featurette-heading golden_color m-4 mb-5 lead" style="font-size:30px">Viral Infection Predicter</h2><hr>
+
+
+                               
+                               <div class="container">
+                                   <div class="row"> 
+                                    <div class="col-sm">
+                                        <div class="col col-md-12 m-4">
+                                            <div  id="virus_family_select" >
+                                                    <span class="lead">Viral Family : </span>
+                                                    <select id="virus_family" class="selectpicker border border-primary lg " >
+                                                    <option></option>
+                                                    <option value="1">AdenoVirus</option>
+                                                    <option value="2">CoronaVirus</option>
+                                                    <option value="3">Influenza</option>
+                                                    </select>
+                                            </div>
+                                            
+                                        <div>  <br>
+                                    </div>
+                                 </div>
+                                 <div id="attribute_input" class="container" style="display:none">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                      
+
+                                            <div class="container">
+                                                <div class="row">
+                                                        <div class="col col-sm-11">
+                                                             <input type="text" name="pepe" id="pepe" class="shadow-lg search form-control border border-info" placeholder="Enter The Host Name" minlength="3">
+                                                        </div>
+                                                        <div class="col col-sm-1">
+                                                                    <button  onclick="add_host()"  class="btn btn-dark">Ekle</button>
+                                                        </div>
+                                                </div><br>
+                                               <form class="mr-5">
+                                                     <textarea id="host_name_textarea" rows="3" class="form-control  bg-light text-primary" readonly></textarea>
+                                                </form>
+                                            </div> 
+
+
+                                        </div><br>
+                                        <div class="col-sm-1"></div><br>
+                                        <div class="col-sm">
+                                        
+
+                                            <div class="container">
+                                                <div class="row">
+                                                        <div class="col col-sm-11">
+                                                           <input type="text" name="pepe2" id="pepe2" class="shadow-lg search form-control border border-info" placeholder="Enter The Virus Name" minlength="3">
+                                                        </div>
+                                                        <div class="col col-sm-1">
+                                                                    <button onclick="add_virus()" class="btn btn-dark">Ekle</button>
+                                                        </div>
+                                                </div><br>
+                                                <form class="mr-5">
+                                                     <textarea id="virus_name_textarea"  rows="3" class="form-control bg-light text-primary" readonly></textarea>
+                                                </form>
+                                            </div>
+
+
+                                        </div><br>
+                                            <button id="search" type="submit" class="btn btn-block btn-success mt-5 ml-3 mr-3 p-2">Predict</button>
+                                                
+                                    </div>
+                                    </div>
+                           
+                        </div>    
+                                 
+                </div>                           
+            </div>
+        </div>
+    </div>
+      
+    </main>
+
+      
+      {% include "WEB_PAGE_PARTS/footer.html" %}
+   </body>
+   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
+  <script>
+    $(function(){
+        $( '#pepe').autocomplete({
+            source: '{% url 'viral_infectpredicter' %}',
+            minLength:3
+        });
+    });
+   $(function(){
+        $( '#pepe2').autocomplete({
+            source: '{% url 'viral_infectpredicter' %}',
+            minLength:3
+        });
+    });
+    $(window).on("load",function(){
+            $(".spinner-wrapper").fadeOut("slow");
+
+            $('#virus_family_select').change(function(){
+            $('#attribute_input').show("slow");
+           
+            });   
+             $('#pepe').change(function(){
+                 $('#virus_name_div').show("slow");
+           
+            });   
+            $('#pepe2').change(function(){
+                 $('#receptor_Sequence_div').show("slow");
+                 $('#viral_protein_Sequence_div').show("slow");
+                 
+           
+            });  
+    });
+
+    
+
+  </script>
+<script>
+
+  function add_host(){
+    var a=document.getElementById('pepe').value;
+    document.getElementById('pepe').value="";
+    document.getElementById('host_name_textarea').value+=a+"+";
+    
+  };
+    function add_virus(){
+    var a=document.getElementById('pepe2').value;
+    document.getElementById('pepe2').value="";
+    document.getElementById('virus_name_textarea').value+=a+"+";
+    
+  };
+
+
+
+
+</script>
+</html>
